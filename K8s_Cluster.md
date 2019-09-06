@@ -6,8 +6,8 @@ This documentation guides you in setting up a cluster with one master node and o
 ## Assumptions
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
-|Master|kmaster.example.com|172.42.42.100|CentOS 7|4G|2|
-|Worker|kworker.example.com|172.42.42.101|CentOS 7|2G|1|
+|Master|kmaster.sk.com|172.42.42.100|CentOS 7|4G|2|
+|Worker|kworker.sk.com|172.42.42.101|CentOS 7|2G|1|
 
 ## On both Kmaster and Kworker
 Perform all the commands as root user unless otherwise specified
@@ -16,8 +16,8 @@ Perform all the commands as root user unless otherwise specified
 So that we can talk to each of the nodes in the cluster
 ```
 cat >>/etc/hosts<<EOF
-172.42.42.100 kmaster.example.com kmaster
-172.42.42.101 kworker.example.com kworker
+172.42.42.100 kmaster.sk.com kmaster
+172.42.42.101 kworker.sk.com kworker
 EOF
 ```
 ##### Install, enable and start docker service
@@ -80,19 +80,19 @@ systemctl start kubelet
 ## On kmaster
 ##### Initialize Kubernetes Cluster
 ```
-kubeadm init --apiserver-advertise-address=172.42.42.100 --pod-network-cidr=10.244.0.0/16
+kubeadm init --apiserver-advertise-address=172.42.42.100 --pod-network-cidr=10.10.0.0/16
 ```
 ##### Copy kube config
 To be able to use kubectl command to connect and interact with the cluster, the user needs kube config file.
 
-In my case, the user account is venkatn
+In my case, the user account is subbu
 ```
-mkdir /home/venkatn/.kube
-cp /etc/kubernetes/admin.conf /home/venkatn/.kube/config
-chown -R venkatn:venkatn /home/venkatn/.kube
+mkdir /home/subbu/.kube
+cp /etc/kubernetes/admin.conf /home/subbu/.kube/config
+chown -R subbu:subbu /home/subbu/.kube
 ```
 ##### Deploy flannel network
-This has to be done as the user in the above step (in my case it is __venkatn__)
+This has to be done as the user in the above step (in my case it is __subbu__)
 ```
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
