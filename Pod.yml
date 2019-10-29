@@ -7,9 +7,45 @@ spec:
     containers: 
        - name: CENTOS
          image: kandepi143/centos:1
-         command: ["/bn/bash". "-c", "while true; do echo welcome; sleep 5 ; done"]
+         command: ["/bn/bash", "-c", "while true; do echo welcome; sleep 5 ; done"]
          
 # kubectl apply -f Pod1.yml
 
 --------------------------------------------------------------------------------
             
+# vi Pod2.yml
+kind: Pod
+apiVersion: v1
+metadata:
+    name: testpod2
+spec:
+    containers:
+        - name: container1
+          image: centos
+          command: ["/bin/bash", "-c", "while true; do echo cenots; sleep 5 ; done"]
+         
+        - name: container2
+          image: ubuntu
+          command: ["/bin/bash", "-c", "while true; do echo ubuntu; sleep 5 ; done"]
+          
+# kubectl apply -f Pod2.yml
+
+--------------------------------------------------------------------------------
+
+# vi Pod3.yml
+kind: Pod
+apiVersion: v1
+metadata:
+    name: testpod3
+spec:
+    containers:
+        - name: Centos
+          image: centos
+          env:
+            - name: mobile_no
+              value: 9603604686
+              
+# kubectl apply -f Pod3.yml
+# kubectl exec environments -- env
+
+---------------------------------------------------------------------------
