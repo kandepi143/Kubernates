@@ -1,0 +1,15 @@
+# vi Pod1.yml
+kind: Pod
+apiVersion: v1
+metadata: 
+    name: testpod1
+spec:
+    containers: 
+       - name: CENTOS
+         image: kandepi143/centos:1
+         command: ["/bn/bash". "-c", "while true; do echo welcome; sleep 5 ; done"]
+         
+# kubectl apply -f Pod1.yml
+
+--------------------------------------------------------------------------------
+            
