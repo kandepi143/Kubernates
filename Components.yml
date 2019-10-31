@@ -1,1 +1,4 @@
-a
+API Server:
+      Its kind of a gatekeeper for entire cluster, in case if you want create, update, delete, or even disply any kubernates objects inside a kubernats cluster, it has go thourgh the api-server.
+      api-server validates &  configures the api objects, that we submit.
+      These api objects can be pods, services, replication-controller
