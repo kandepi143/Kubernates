@@ -10,7 +10,7 @@ spec:
          command: ["/bn/bash", "-c", "while true; do echo welcome; sleep 5 ; done"]
          
 # kubectl apply -f Pod1.yml
-
+# kubectl get pods
 --------------------------------------------------------------------------------
             
 # vi Pod2.yml
@@ -41,6 +41,7 @@ spec:
     containers:
         - name: Centos
           image: centos
+          command: ["/bin/bash", "-c", "while true; do echo welcome_to_devops; sleep 5 ; done"]
           env:
             - name: mobile_no
               value: 9603604686
@@ -51,4 +52,67 @@ spec:
 ---------------------------------------------------------------------------
 
 # vi Pod4.yml
-kind: 
+kind: Pod
+apiVersion: v1
+metadata:
+    name: testpod4
+spec:
+    containers:
+        - name: resource
+          image: centos
+          command: ["/bin/bash"; "-c", "while true; do echo welcome_subbu; sleep 6 ; done"]
+          env:
+            - name: subbu
+              value: devopsEngineer
+          resources:
+            requests:
+               memory: 64Mi
+               cpu: 100m
+            limits:
+               memory: 128Mi
+               cpu: 200m
+                 
+# kubectl apply -f Pod4.yml
+# kubectl describe pods resources
+# kubectl top pod --all-namespaces 
+# kubectl get nodes --no-headers | awk '{print $1}' | xargs -l {} sh -c 'echo {}; kubectl describe node {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo'  ( To see the pods that uses the most CUP & Memory )
+# kubectl delete -f Pod4.yml
+
+---------------------------------------------------------------------------------
+
+# vi Pod5.yml
+kind: Pod
+apiVersion: v1
+metadata:
+    name: lablepod
+    lables:
+        day: sunday
+        month: November
+spec:
+    containers:
+        - name: Lable
+          image: ubuntu
+          command: ["/bin/bash"; "-c", "while true; do echo Lables_container; sleep 6 ; done"]
+     
+# kubectl apply -f Pod5.yml
+# kubectl get pods
+# kubectl get pods --show-lables
+# kubectl lable pods <podname> <lablekey>=<value>  ( add a lable to an existing pod )
+# kubectl lable pods lablepod love=cs 
+# kubectl get pods --show-lables
+# kubectl get pods -l love=cs    ( showning pos using lable name )
+# kubectl get pods -l day=sunday
+# kubectl delete pod -l love=cs  ( delete a pod using lable name )
+
+----------------------------------------------------------------------------------
+
+# vi Pod6.yml
+
+        
+
+        
+        
+        
+        
+        
+        
